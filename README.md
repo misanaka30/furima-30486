@@ -23,11 +23,11 @@ has_many records
 | user             | references | foreign_key: true |
 | title            | string     | null: false       |
 | describe         | text       | null: false       |
-| category_id      | string     | null: false       |
-| status_id        | string     | null: false       |
-| shipping_cost_id | string     | null: false       |
-| shipping_area_id | string     | null: false       |
-| shipping_days_id | string     | null: false       |
+| category_id      | integer    | null: false       |
+| status_id        | integer    | null: false       |
+| shipping_cost_id | integer    | null: false       |
+| shipping_area_id | integer    | null: false       |
+| shipping_days_id | integer    | null: false       |
 | price            | integer    | null: false       |
 
 ### Association
@@ -62,7 +62,7 @@ has_one address
 | house_number    | string     | null: false       |
 | building_number | string     |                   |
 | phone_number    | string     | null: false       |
-| user            | references | foreign_key: true |
+| record          | references | foreign_key: true |
 
 ### Association
 belongs_to_active_hash :prefecture
