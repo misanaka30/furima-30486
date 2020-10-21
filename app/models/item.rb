@@ -11,15 +11,11 @@ class Item < ApplicationRecord
   with_options presence: true do
    validates :image
    validates :category
-   validates :status
-   validates :shipping_cost
-   validates :shipping_area
-   validates :shipping_days
    validates :title
    validates :describe
   end
   
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1, message: "can't be blank" } do
    validates :category_id
    validates :status_id
    validates :shipping_cost_id
