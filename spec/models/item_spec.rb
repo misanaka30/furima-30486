@@ -5,7 +5,7 @@ RSpec.describe Item, type: :model do
     before do
       @item = FactoryBot.build(:item)
     end
-  
+
     context '新規出品登録がうまくいくとき' do
       it ' title,describe,catrgory_id,status_id,shipping_cost_id ,shipping_area_id,shipping_days_id,priceが存在すれば登録できる' do
         expect(@item).to be_valid
@@ -14,13 +14,13 @@ RSpec.describe Item, type: :model do
 
     context '新規出品登録がうまくいかないとき' do
       it 'titleが空だと登録できない' do
-        @item.title = ""
+        @item.title = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Title can't be blank")
       end
 
       it 'describeが空だと登録できない' do
-        @item.describe = ""
+        @item.describe = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Describe can't be blank")
       end
@@ -86,7 +86,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'priceが空だと登録できない' do
-        @item.price = ""
+        @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
@@ -94,19 +94,19 @@ RSpec.describe Item, type: :model do
       it 'priceが299円以下だと登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
 
       it 'priceが10000000円以上だと登録できない' do
-        @item.price = 100000000
+        @item.price = 100_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
 
       it 'priceが全角数字だと登録できない' do
-        @item.price = "２０００"
+        @item.price = '２０００'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price is not a number")
+        expect(@item.errors.full_messages).to include('Price is not a number')
       end
 
       it 'imageが空だと登録できない' do
@@ -117,4 +117,3 @@ RSpec.describe Item, type: :model do
     end
   end
 end
-
