@@ -1,14 +1,13 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_record, only: [:index, :create, :move_to_index]
   before_action :move_to_index, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @record_address = RecordAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @record_address = RecordAddress.new(record_params)
     
     if @record_address.valid?
@@ -36,10 +35,13 @@ class RecordsController < ApplicationController
     end
 
     def move_to_index
-      @item = Item.find(params[:item_id])
-      if current_user == @item.user 
+      if current_user == @item.user || @item.record
         redirect_to root_path
       end
+    end
+    
+    def set_record  
+      @item = Item.find(params[:item_id])
     end
 
 
