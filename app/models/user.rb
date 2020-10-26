@@ -6,10 +6,9 @@ class User < ApplicationRecord
   has_many :items
   has_many :records
 
-  
   validates :nickname, presence: true
 
-  with_options presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze } do
+  with_options presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze } do
     validates :password, length: { minimum: 6 }
   end
 
@@ -26,7 +25,6 @@ class User < ApplicationRecord
   validates :birthday, presence: true
 
   with_options presence: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i } do
-     validates :email   
-  end  
- 
+    validates :email
+  end
 end

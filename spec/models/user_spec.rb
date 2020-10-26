@@ -10,7 +10,6 @@ describe User do
       it 'nicknameとemail、passwordとpassword_confirmation、first_nameとlast_name、first_name_kanaとlast_name_kana、生年月日が存在すれば登録できる' do
         expect(@user).to be_valid
       end
-
     end
 
     context '新規登録がうまくいかないとき' do
@@ -29,7 +28,7 @@ describe User do
       it 'emailに＠が含まれていないと登録できない' do
         @user.email = 'aaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid", "Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid', 'Email is invalid')
       end
 
       it '重複したemailが存在する場合登録できない' do
