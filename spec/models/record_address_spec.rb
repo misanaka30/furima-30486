@@ -5,13 +5,18 @@ RSpec.describe RecordAddress, type: :model do
     before do
       @record_address = FactoryBot.build(:record_address)
     end
-
+    
     context '保存がうまくいくとき' do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@record_address).to be_valid
       end
+      
+      it 'building_nameは空でも保存できること' do
+        @record_address.building_name = nil
+        expect(@record_address).to be_valid
+      end
     end
-
+    
     context '保存がうまくいかないとき' do
       it 'postal_codeが空だと保存できないこと' do
         @record_address.postal_code = nil
@@ -43,10 +48,6 @@ RSpec.describe RecordAddress, type: :model do
         expect(@record_address.errors.full_messages).to include("House number can't be blank")
       end
 
-      it 'building_nameは空でも保存できること' do
-        @record_address.building_name = nil
-        expect(@record_address).to be_valid
-      end
 
       it 'phone_number空だと保存できないこと' do
         @record_address.phone_number = nil
