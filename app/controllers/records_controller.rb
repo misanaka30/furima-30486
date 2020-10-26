@@ -1,5 +1,6 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
 
   def index
     @item = Item.find(params[:item_id])
@@ -13,7 +14,7 @@ class RecordsController < ApplicationController
     if @record_address.valid?
       pay_item
        @record_address.save
-     redirect_to root_path
+      redirect_to root_path
     else
       render :index
     end
@@ -32,6 +33,13 @@ class RecordsController < ApplicationController
         card: record_params[:token],    # カードトークン
         currency: 'jpy'                 # 通貨の種類（日本円）
       )
+    end
+
+    def move_to_index
+      @item = Item.find(params[:item_id])
+      if current_user == @item.user 
+        redirect_to root_path
+      end
     end
 
 
