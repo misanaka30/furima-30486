@@ -55,7 +55,7 @@ has_one address
 ## addresses テーブル
 | Column          | Type       | Options           |
 | --------------- | ---------- | ----------------- |
-| postal_cord_id  | string     | null: false       |
+| postal_cord     | string     | null: false       |
 | prefecture_id   | integer    | null: false       |
 | city            | string     | null: false       |
 | house_number    | string     | null: false       |
